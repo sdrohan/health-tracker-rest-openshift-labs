@@ -2,6 +2,7 @@ package ie.setu.config
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.transactions.transaction
 import org.postgresql.util.PSQLException
 
 class DbConfig {
@@ -31,6 +32,11 @@ class DbConfig {
                 user = PGUSER,
                 password = PGPASSWORD
             )
+
+            transaction {
+                exec("SELECT 1;") // Forces a real connection to test validity
+            }
+
             logger.info { "DB Connected Successfully to $PGDATABASE at $rawHost:$PGPORT" }
         } catch (e: PSQLException) {
             logger.error(e) { "Error in DB Connection: ${e.message}" }
