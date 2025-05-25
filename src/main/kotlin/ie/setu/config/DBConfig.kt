@@ -23,6 +23,7 @@ class DbConfig {
         val dbUrl = "jdbc:postgresql://$rawHost:$PGPORT/$PGDATABASE"
 
         try {
+            logger.info { "CI/CD - automatic deployment from GitHub Actions: V1.0" }
             logger.info { "Starting DB Connection...\nURL: $dbUrl" }
             logger.info { "rawHost...: $rawHost" }
             logger.info { "pghost...: $PGHOST" }
