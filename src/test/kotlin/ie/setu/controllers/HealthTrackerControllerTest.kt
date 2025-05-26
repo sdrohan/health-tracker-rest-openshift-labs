@@ -1,6 +1,5 @@
 package ie.setu.controllers
 
-import ie.setu.controllers.HealthTrackerController.updateUser
 import ie.setu.domain.User
 import ie.setu.domain.db.Users
 import ie.setu.domain.repository.UserDAO

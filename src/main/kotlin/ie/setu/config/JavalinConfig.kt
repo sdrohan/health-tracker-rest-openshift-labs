@@ -4,6 +4,7 @@ import ie.setu.controllers.HealthTrackerController
 import ie.setu.utils.jsonObjectMapper
 import io.javalin.Javalin
 import io.javalin.json.JavalinJackson
+import io.javalin.vue.VueComponent
 
 class JavalinConfig {
 
@@ -11,6 +12,8 @@ class JavalinConfig {
     val app = Javalin.create(
         { config ->
             config.jsonMapper(JavalinJackson(jsonObjectMapper()))
+            config.staticFiles.enableWebjars()
+            config.vue.vueInstanceNameInJs = "app"
         }
     ).apply {
         exception(Exception::class.java) { e, ctx -> e.printStackTrace() }
@@ -33,6 +36,12 @@ class JavalinConfig {
         app.get("/api/activities", HealthTrackerController::getAllActivities)
         app.post("/api/activities", HealthTrackerController::addActivity)
         app.get("/api/users/{user-id}/activities", HealthTrackerController::getActivitiesByUserId)
+
+        // The @routeComponent that we added in layout.html earlier will be replaced
+        // by the String inside the VueComponent. This means a call to / will load
+        // the layout and display our <home-page> component.
+        app.get("/", VueComponent("<home-page></home-page>"))
+
     }
 
     private fun getRemoteAssignedPort(): Int {
