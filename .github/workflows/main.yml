@@ -6,7 +6,9 @@ on:
       - master  
 
 jobs:
-  build-deploy:
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +29,12 @@ jobs:
     - name: Build the application with Maven
       run: mvn clean package -DskipTests
 
+  deploy:
+    name: Deploy to OpenShift
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
     - name: OpenShift Client Installer
       uses: redhat-actions/oc-installer@v1.2
           
