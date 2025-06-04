@@ -19,7 +19,17 @@
         <exposed-version>0.55.0</exposed-version>
         <postresql-version>42.7.4</postresql-version>
         <openshift-maven-plugin.version>1.18.1</openshift-maven-plugin.version>
+        <dokka.version>1.7.20</dokka.version>
     </properties>
+
+    <!-- Location of the Maven Plugin for Dokka -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>https://jcenter.bintray.com/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <dependency>
@@ -238,6 +248,20 @@
                 </configuration>
             </plugin>
 
+            <!-- Maven Plugin for Dokka - basic configuration -->
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>${dokka.version}</version>
+                <executions>
+                    <execution>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>dokka</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
     </build>
