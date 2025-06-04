@@ -46,6 +46,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: target-artifact
+        path: target/
 
     - name: OpenShift Client Installer
       uses: redhat-actions/oc-installer@v1.2
