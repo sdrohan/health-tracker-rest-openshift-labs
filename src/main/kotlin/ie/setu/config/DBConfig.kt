@@ -22,9 +22,8 @@ class DbConfig {
         val PGUSER = System.getenv("POSTGRESQL_USER") ?: "sa"
         val PGPASSWORD = System.getenv("POSTGRESQL_PASSWORD") ?: ""
 
-
         try {
-            logger.info { "CI/CD - automatic deployment from GitHub Actions: V1.0" }
+            logger.info { "CI/CD - automatic deployment from GitHub Actions: V2.0" }
             logger.info { "Starting DB Connection...\nPGHOST: $PGHOST" }
 
             if (PGHOST == "localhost"){
